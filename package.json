@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/react-native-community/react-native-side-menu",
   "dependencies": {
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
