@@ -142,18 +142,28 @@ export default class SideMenu extends React.Component {
       );
     }
 
+    const boundryStyle = this.props.menuPosition === 'right' ?
+      { left: this.state.width - this.state.openMenuOffset } :
+      { right: this.state.width - this.state.openMenuOffset };
+
     const { width, height } = this.state;
-    const ref = sideMenu => (this.sideMenu = sideMenu);
+    const ref = (sideMenu) => { this.sideMenu = sideMenu; };
     const style = [
       styles.frontView,
       { width, height },
-      this.props.animationStyle(this.state.left),
+      this.props.animationStyle(Animated.Value(boundryStyle.left || this.state.left)),
     ];
+
+    const menu = (
+      <View style={[styles.menu, boundryStyle]}>
+        {this.props.menu}
+      </View>
+    );
 
     return (
       <Animated.View style={style} ref={ref} {...this.responder.panHandlers}>
-        {this.props.children}
         {overlay}
+        {menu}
       </Animated.View>
     );
   }
@@ -234,22 +244,11 @@ export default class SideMenu extends React.Component {
   }
 
   render(): React.Element<void, void> {
-    const boundryStyle = this.props.menuPosition === 'right' ?
-      { left: this.state.width - this.state.openMenuOffset } :
-      { right: this.state.width - this.state.openMenuOffset };
-
-    const menu = (
-      <View style={[styles.menu, boundryStyle]}>
-        {this.props.menu}
-      </View>
-    );
-
     return (
       <View
         style={styles.container}
         onLayout={this.onLayoutChange}
       >
-        {menu}
         {this.getContentView()}
       </View>
     );
