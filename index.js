@@ -59,7 +59,6 @@ function shouldOpenMenu(dx: number): boolean {
 }
 
 export default class SideMenu extends React.Component {
-  onLayoutChange: Function;
   onStartShouldSetResponderCapture: Function;
   onMoveShouldSetPanResponder: Function;
   onPanResponderMove: Function;
@@ -101,7 +100,7 @@ export default class SideMenu extends React.Component {
       left,
     };
 
-    this.state.left.addListener(({value}) => this.props.onSliding(Math.abs((value - this.state.hiddenMenuOffset) / (this.state.openMenuOffset - this.state.hiddenMenuOffset))));
+    this.state.left.addListener(({ value }) => this.props.onSliding(Math.abs((value - this.state.hiddenMenuOffset) / (this.state.openMenuOffset - this.state.hiddenMenuOffset))));
   }
 
   componentWillMount(): void {
@@ -122,9 +121,12 @@ export default class SideMenu extends React.Component {
 
   onLayoutChange(e: Event) {
     const { width, height } = e.nativeEvent.layout;
-    const openMenuOffset = width * this.state.openOffsetMenuPercentage;
-    const hiddenMenuOffset = width * this.state.hiddenMenuOffsetPercentage;
-    this.setState({ width, height, openMenuOffset, hiddenMenuOffset });
+
+    if (width && height) {
+      const openMenuOffset = width * this.state.openOffsetMenuPercentage;
+      const hiddenMenuOffset = width * this.state.hiddenMenuOffsetPercentage;
+      this.setState({ width, height, openMenuOffset, hiddenMenuOffset });
+    }
   }
 
   /**
@@ -151,7 +153,7 @@ export default class SideMenu extends React.Component {
     const style = [
       styles.frontView,
       { width, height },
-      this.props.animationStyle(Animated.Value(boundryStyle.left || this.state.left)),
+      this.props.animationStyle(Animated.Value(0)),
     ];
 
     const menu = (
