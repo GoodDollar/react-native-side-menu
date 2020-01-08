@@ -18,9 +18,10 @@ export default StyleSheet.create({
   menu: {
     ...absoluteStretch,
     backgroundColor: 'white',
-    borderBottomLeftRadius: '5px',
-    borderTopLeftRadius: '5px',
-    boxShadow: 'rgba(0, 0, 0, 0.5) 0px 0px 30px',
+    borderBottomLeftRadius: 5,
+    borderTopLeftRadius: 5,
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowRadius: 30,
   },
   frontView: {
     flex: 1,

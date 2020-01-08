@@ -153,7 +153,7 @@ export default class SideMenu extends React.Component {
     const style = [
       styles.frontView,
       { width, height },
-      this.props.animationStyle(Animated.Value(0)),
+      this.props.animationStyle(new Animated.Value(0)),
     ];
 
     const menu = (
