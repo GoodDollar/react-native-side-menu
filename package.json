@@ -1,5 +1,5 @@
 {
-  "name": "react-native-side-menu-gooddapp",
+  "name": "@gooddollar/react-native-side-menu",
   "version": "2.0.2",
   "description": "Simple customizable component to create side menu",
   "main": "build/index.js",
